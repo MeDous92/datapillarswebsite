@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: "Complimentary Assessment",
   description:
     "A focused Data Maturity & Opportunity Assessment to identify risks, quick wins and the first credible business case.",
+  alternates: { canonical: "/assessment" },
 };
 
 const inputs = [

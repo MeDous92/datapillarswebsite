@@ -43,8 +43,10 @@ export default function Analytics() {
 
   useEffect(() => {
     const savedChoice = window.localStorage.getItem(consentKey);
-    setConsent(savedChoice === "accepted" || savedChoice === "declined" ? savedChoice : null);
-    setChoiceLoaded(true);
+    queueMicrotask(() => {
+      setConsent(savedChoice === "accepted" || savedChoice === "declined" ? savedChoice : null);
+      setChoiceLoaded(true);
+    });
   }, []);
 
   useEffect(() => {
@@ -81,15 +83,21 @@ export default function Analytics() {
 
     function handleSubmit(event: SubmitEvent) {
       if ((event.target as HTMLElement).classList.contains("assessment-form")) {
-        track("assessment_brief_prepared", { source_page: pathname });
+        track("contact_form_attempt", { source_page: pathname });
       }
+    }
+
+    function handleContactSubmitted() {
+      track("contact_form_submitted", { source_page: pathname });
     }
 
     document.addEventListener("click", handleClick);
     document.addEventListener("submit", handleSubmit);
+    window.addEventListener("datapillars:contact-submitted", handleContactSubmitted);
     return () => {
       document.removeEventListener("click", handleClick);
       document.removeEventListener("submit", handleSubmit);
+      window.removeEventListener("datapillars:contact-submitted", handleContactSubmitted);
     };
   }, [consent, pathname]);
 

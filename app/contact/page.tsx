@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { PageHero } from "../components";
 import { founders } from "../data";
 import AssessmentForm from "./assessment-form";
@@ -7,6 +8,7 @@ export const metadata: Metadata = {
   title: "Start a Conversation",
   description:
     "Prepare a focused brief for a complimentary Data Maturity & Opportunity Assessment with DataPillars.",
+  alternates: { canonical: "/contact" },
 };
 
 export default function ContactPage() {
@@ -25,9 +27,9 @@ export default function ContactPage() {
             <p className="eyebrow">Prepare your brief</p>
             <h2>A better first conversation begins with a clear problem.</h2>
             <p className="contact-intro">
-              This short planner turns your inputs into a structured brief you
-              can copy or open in your email application. Do not include
-              confidential records, credentials or personal data.
+              Send a concise brief directly to the DataPillars founders. We use
+              it only to respond to your enquiry; do not include confidential
+              records, credentials or sensitive personal data.
             </p>
             <AssessmentForm />
           </div>
@@ -46,13 +48,21 @@ export default function ContactPage() {
                   target="_blank"
                   rel="noreferrer"
                 >
-                  <img src={founder.image} alt="" />
+                  <Image src={founder.image} alt="" loading="lazy" width={58} height={58} sizes="58px" />
                   <span>
                     <strong>{founder.name}</strong>
                     <small>{founder.role} · LinkedIn ↗</small>
                   </span>
                 </a>
               ))}
+            </div>
+            <div className="direct-contact-actions">
+              <a className="button button-coral" href="https://wa.me/971542185806?text=Hello%20DataPillars%2C%20I%27d%20like%20to%20discuss%20an%20opportunity." target="_blank" rel="noreferrer">
+                WhatsApp us
+              </a>
+              <a className="button button-dark-outline" href="tel:+971542185806">
+                Call +971 54 218 5806
+              </a>
             </div>
             <div className="contact-aside-note">
               <strong>Complimentary assessment</strong>

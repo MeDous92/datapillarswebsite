@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { CallToAction, PageHero, SectionHeading } from "../components";
 import { founders } from "../data";
 
@@ -7,6 +8,7 @@ export const metadata: Metadata = {
   title: "About",
   description:
     "Meet DataPillars and its co-founders, Mike Spence and Mohamed Abdo.",
+  alternates: { canonical: "/about" },
 };
 
 const principles = [
@@ -56,14 +58,21 @@ export default function AboutPage() {
         <div className="container">
           <SectionHeading
             eyebrow="Co-founders"
-            title="Complementary experience. One delivery philosophy."
+            title="Consultants WHO Implement"
             description="Mike Spence and Mohamed Abdo bring senior experience across data management, governance, engineering, analytics, operating models and AI enablement."
           />
           <div className="founder-grid">
             {founders.map((founder) => (
               <article key={founder.name} className="founder-card">
                 <div className="founder-photo">
-                  <img src={founder.image} alt={founder.alt} />
+                  <Image
+                    src={founder.image}
+                    alt={founder.alt}
+                    loading="lazy"
+                    width={400}
+                    height={400}
+                    sizes="(max-width: 560px) 148px, 196px"
+                  />
                 </div>
                 <div className="founder-content">
                   <p className="eyebrow">{founder.role}</p>

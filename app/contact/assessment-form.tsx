@@ -1,103 +1,105 @@
 "use client";
 
-import { FormEvent, useMemo, useState } from "react";
+import { FormEvent, useState } from "react";
 
 type BriefFields = {
   name: string;
+  email: string;
+  phone: string;
   organisation: string;
   businessArea: string;
   pain: string;
   systems: string;
   outcome: string;
+  website: string;
+  consent: boolean;
 };
 
 const initialFields: BriefFields = {
   name: "",
+  email: "",
+  phone: "",
   organisation: "",
   businessArea: "",
   pain: "",
   systems: "",
   outcome: "",
+  website: "",
+  consent: false,
 };
+
+type SubmitState = "idle" | "sending" | "sent" | "error";
 
 export default function AssessmentForm() {
   const [fields, setFields] = useState(initialFields);
-  const [prepared, setPrepared] = useState(false);
-  const [copied, setCopied] = useState(false);
+  const [status, setStatus] = useState<SubmitState>("idle");
+  const [message, setMessage] = useState("");
 
-  const brief = useMemo(
-    () =>
-      [
-        "DataPillars — Assessment Conversation Brief",
-        "",
-        `Name: ${fields.name || "Not provided"}`,
-        `Organisation: ${fields.organisation || "Not provided"}`,
-        `Business area: ${fields.businessArea || "Not provided"}`,
-        `Current pain or opportunity: ${fields.pain || "Not provided"}`,
-        `Relevant systems or reports: ${fields.systems || "Not provided"}`,
-        `Desired outcome: ${fields.outcome || "Not provided"}`,
-      ].join("\n"),
-    [fields],
-  );
-
-  function updateField(key: keyof BriefFields, value: string) {
-    setPrepared(false);
-    setCopied(false);
+  function updateField<K extends keyof BriefFields>(key: K, value: BriefFields[K]) {
+    setStatus("idle");
+    setMessage("");
     setFields((current) => ({ ...current, [key]: value }));
   }
 
-  function prepareBrief(event: FormEvent<HTMLFormElement>) {
+  async function submitEnquiry(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    setPrepared(true);
-    setCopied(false);
-  }
+    if (status === "sending") return;
 
-  async function copyBrief() {
+    setStatus("sending");
+    setMessage("");
+
     try {
-      await navigator.clipboard.writeText(brief);
-      setCopied(true);
-    } catch {
-      setCopied(false);
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(fields),
+      });
+      const result = (await response.json()) as { ok?: boolean; message?: string };
+
+      if (!response.ok || !result.ok) {
+        throw new Error(result.message || "We could not send the enquiry.");
+      }
+
+      setStatus("sent");
+      setMessage("Thank you. Your enquiry has been sent to the DataPillars founders.");
+      setFields(initialFields);
+      window.dispatchEvent(new CustomEvent("datapillars:contact-submitted"));
+    } catch (error) {
+      setStatus("error");
+      setMessage(
+        error instanceof Error
+          ? error.message
+          : "We could not send the enquiry. Please call or use WhatsApp.",
+      );
     }
   }
 
-  const emailHref = `mailto:?subject=${encodeURIComponent(
-    "DataPillars assessment conversation",
-  )}&body=${encodeURIComponent(brief)}`;
-
   return (
     <div className="assessment-form-shell">
-      <form className="assessment-form" onSubmit={prepareBrief}>
+      <form className="assessment-form" onSubmit={submitEnquiry}>
         <div className="form-row">
           <label>
             Your name
-            <input
-              name="name"
-              value={fields.name}
-              onChange={(event) => updateField("name", event.target.value)}
-              autoComplete="name"
-              required
-            />
+            <input name="name" value={fields.name} onChange={(event) => updateField("name", event.target.value)} autoComplete="name" maxLength={120} required />
           </label>
           <label>
+            Work email
+            <input type="email" name="email" value={fields.email} onChange={(event) => updateField("email", event.target.value)} autoComplete="email" inputMode="email" maxLength={180} required />
+          </label>
+        </div>
+        <div className="form-row">
+          <label>
             Organisation
-            <input
-              name="organisation"
-              value={fields.organisation}
-              onChange={(event) => updateField("organisation", event.target.value)}
-              autoComplete="organization"
-              required
-            />
+            <input name="organisation" value={fields.organisation} onChange={(event) => updateField("organisation", event.target.value)} autoComplete="organization" maxLength={180} required />
+          </label>
+          <label>
+            Phone <span className="optional-label">Optional</span>
+            <input type="tel" name="phone" value={fields.phone} onChange={(event) => updateField("phone", event.target.value)} autoComplete="tel" inputMode="tel" maxLength={60} />
           </label>
         </div>
         <label>
           Business area
-          <select
-            name="businessArea"
-            value={fields.businessArea}
-            onChange={(event) => updateField("businessArea", event.target.value)}
-            required
-          >
+          <select name="businessArea" value={fields.businessArea} onChange={(event) => updateField("businessArea", event.target.value)} required>
             <option value="" disabled>Select the initial focus</option>
             <option>Finance</option>
             <option>Operations</option>
@@ -111,63 +113,39 @@ export default function AssessmentForm() {
         </label>
         <label>
           What is the current pain or opportunity?
-          <textarea
-            name="pain"
-            value={fields.pain}
-            onChange={(event) => updateField("pain", event.target.value)}
-            placeholder="For example: conflicting KPI results, manual consolidation, recurring quality issues or an AI use case that needs a trusted foundation."
-            rows={5}
-            required
-          />
+          <textarea name="pain" value={fields.pain} onChange={(event) => updateField("pain", event.target.value)} placeholder="For example: conflicting KPI results, manual consolidation, recurring quality issues or an AI use case that needs a trusted foundation." rows={5} maxLength={3000} required />
         </label>
         <div className="form-row">
           <label>
-            Relevant systems or reports
-            <input
-              name="systems"
-              value={fields.systems}
-              onChange={(event) => updateField("systems", event.target.value)}
-              placeholder="High-level names only"
-            />
+            Relevant systems or reports <span className="optional-label">Optional</span>
+            <input name="systems" value={fields.systems} onChange={(event) => updateField("systems", event.target.value)} placeholder="High-level names only" maxLength={1000} />
           </label>
           <label>
             Desired outcome
-            <input
-              name="outcome"
-              value={fields.outcome}
-              onChange={(event) => updateField("outcome", event.target.value)}
-              placeholder="What should become better?"
-              required
-            />
+            <input name="outcome" value={fields.outcome} onChange={(event) => updateField("outcome", event.target.value)} placeholder="What should become better?" maxLength={1500} required />
           </label>
         </div>
-        <button type="submit" className="button button-coral">
-          Prepare my brief
+        <label className="honeypot-field" aria-hidden="true">
+          Website
+          <input name="website" value={fields.website} onChange={(event) => updateField("website", event.target.value)} tabIndex={-1} autoComplete="off" />
+        </label>
+        <label className="consent-field">
+          <input type="checkbox" checked={fields.consent} onChange={(event) => updateField("consent", event.target.checked)} required />
+          <span>I consent to DataPillars using these details to respond to this enquiry.</span>
+        </label>
+        <button type="submit" className="button button-coral" disabled={status === "sending"}>
+          {status === "sending" ? "Sending enquiry…" : "Send my enquiry"}
         </button>
         <p className="form-privacy">
-          Your inputs are not transmitted or stored by this page. They are used
-          only to prepare a concise brief in your browser.
+          Your enquiry is sent privately to DataPillars. We do not display the
+          receiving address or use your information for unrelated marketing.
         </p>
-      </form>
-
-      {prepared ? (
-        <div className="prepared-brief" role="status">
-          <p className="eyebrow">Your conversation brief</p>
-          <pre>{brief}</pre>
-          <div className="button-row">
-            <button type="button" className="button button-secondary" onClick={copyBrief}>
-              {copied ? "Brief copied" : "Copy brief"}
-            </button>
-            <a className="button" href={emailHref}>
-              Open in email
-            </a>
-          </div>
-          <p>
-            Address the email to your DataPillars contact, or use the founder
-            links alongside this form to start the conversation.
+        {message ? (
+          <p className={`form-status form-status-${status}`} role={status === "error" ? "alert" : "status"}>
+            {message}
           </p>
-        </div>
-      ) : null}
+        ) : null}
+      </form>
     </div>
   );
 }

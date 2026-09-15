@@ -125,7 +125,7 @@ export const workSamples: WorkSample[] = [
     category: "Business intelligence",
     description:
       "An executive-ready view of activity, cancellations, passengers, revenue and operational trends.",
-    image: "/work/airline-analytics.gif",
+    image: "/work/airline-analytics.webp",
     alt: "Operational airline performance dashboard",
     focus: ["Executive KPIs", "Trend analysis", "Operational exceptions"],
   },
@@ -134,7 +134,7 @@ export const workSamples: WorkSample[] = [
     category: "Insight",
     description:
       "A governed analytical experience connecting headline performance with category and time-based drivers.",
-    image: "/work/sales-analytics.gif",
+    image: "/work/sales-analytics.webp",
     alt: "Interactive sales and profit dashboard",
     focus: ["KPI design", "Drill paths", "Decision support"],
   },
@@ -143,7 +143,7 @@ export const workSamples: WorkSample[] = [
     category: "Management reporting",
     description:
       "A concise management view that brings financial position, comparison and trend signals into one narrative.",
-    image: "/work/executive-reporting.png",
+    image: "/work/executive-reporting.webp",
     alt: "Anonymised executive financial dashboard",
     focus: ["Management narrative", "Exception focus", "Measure governance"],
   },
@@ -152,7 +152,7 @@ export const workSamples: WorkSample[] = [
     category: "Operational monitoring",
     description:
       "A multilingual monitoring interface designed to reveal status, target variance and areas requiring action.",
-    image: "/work/performance-monitoring.jpg",
+    image: "/work/performance-monitoring.webp",
     alt: "Arabic portfolio performance monitoring dashboard",
     focus: ["Target tracking", "Multilingual reporting", "Action visibility"],
   },
@@ -203,7 +203,7 @@ export const founders = [
   {
     name: "Mohamed Abdo",
     role: "Co-Founder",
-    image: "/team/mohamed-abdo.jpg",
+    image: "/team/mohamed-abdo-v2.webp",
     alt: "Mohamed Abdo, Co-Founder of DataPillars",
     bio: "A data enablement leader with more than 12 years of experience across data management, governance, business intelligence and AI enablement in diversified organisations.",
     details: [

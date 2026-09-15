@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import {
   CallToAction,
   SectionHeading,
@@ -11,6 +12,7 @@ export const metadata: Metadata = {
   title: "Trusted Data. Measurable Value.",
   description:
     "Advisory, engineering and implementation for trusted data foundations, better decisions, smarter processes and governed AI.",
+  alternates: { canonical: "/" },
 };
 
 export default function Home() {
@@ -178,7 +180,7 @@ export default function Home() {
             {workSamples.slice(0, 3).map((sample) => (
               <article key={sample.title} className="proof-card">
                 <div className="proof-image-wrap">
-                  <img src={sample.image} alt={sample.alt} loading="lazy" />
+                  <Image src={sample.image} alt={sample.alt} loading="lazy" width={1200} height={675} sizes="(max-width: 820px) 100vw, 33vw" />
                 </div>
                 <p className="proof-category">{sample.category}</p>
                 <h3>{sample.title}</h3>
@@ -193,6 +195,9 @@ export default function Home() {
         <div className="container founders-preview-grid">
           <div>
             <p className="eyebrow">Who we are</p>
+            <p className="consultants-statement">
+              Consultants <strong>WHO</strong> Implement
+            </p>
             <h2>Senior practitioners combining strategy with delivery.</h2>
             <p>
               DataPillars was founded to close the space between advice and
@@ -206,7 +211,16 @@ export default function Home() {
           <div className="founder-mini-grid">
             {founders.map((founder) => (
               <article key={founder.name} className="founder-mini">
-                <img src={founder.image} alt={founder.alt} loading="lazy" />
+                <div className="founder-mini-photo">
+                  <Image
+                    src={founder.image}
+                    alt={founder.alt}
+                    loading="lazy"
+                    width={400}
+                    height={400}
+                    sizes="(max-width: 560px) 154px, 154px"
+                  />
+                </div>
                 <div>
                   <h3>{founder.name}</h3>
                   <p>{founder.role}</p>

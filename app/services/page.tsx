@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   title: "Services",
   description:
     "Connected capabilities across data foundations, insight, digitisation and governed AI solutions.",
+  alternates: { canonical: "/services" },
 };
 
 const deliveryPatterns = [

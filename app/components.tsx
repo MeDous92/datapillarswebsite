@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { servicePillars } from "./data";
 
 const navItems = [
@@ -8,15 +9,23 @@ const navItems = [
   { href: "/about", label: "About" },
 ];
 
+const companyLinkedIn = "https://www.linkedin.com/company/104334551/";
+const phoneHref = "tel:+971542185806";
+const whatsappHref =
+  "https://wa.me/971542185806?text=Hello%20DataPillars%2C%20I%27d%20like%20to%20discuss%20a%20data%20or%20AI%20opportunity.";
+
 export function SiteHeader() {
   return (
     <header className="site-header">
       <div className="container header-inner">
         <Link href="/" className="brand-link" aria-label="DataPillars home">
-          <img
+          <Image
             className="brand-logo"
             src="/brand/logo-horizontal.svg"
             alt="DataPillars — Turning Data Into Opportunity"
+            width={245}
+            height={66}
+            priority
           />
         </Link>
         <nav className="desktop-nav" aria-label="Primary navigation">
@@ -50,9 +59,11 @@ export function SiteFooter() {
     <footer className="site-footer">
       <div className="container footer-grid">
         <div className="footer-brand">
-          <img
+          <Image
             src="/brand/logo-dark.svg"
             alt="DataPillars — Turning Data Into Opportunity"
+            width={245}
+            height={66}
           />
           <p>
             Trusted data foundations, better decisions, smarter processes and
@@ -66,6 +77,9 @@ export function SiteFooter() {
             <Link href="/assessment">Assessment</Link>
             <Link href="/work">Our work</Link>
             <Link href="/about">About</Link>
+            <a href={companyLinkedIn} target="_blank" rel="noreferrer">
+              Company LinkedIn ↗
+            </a>
           </div>
         </div>
         <div>
@@ -84,6 +98,21 @@ export function SiteFooter() {
         <p>UAE & GCC · Vendor-neutral · Value-led</p>
       </div>
     </footer>
+  );
+}
+
+export function ContactDock() {
+  return (
+    <aside className="contact-dock" aria-label="Direct contact options">
+      <a href={whatsappHref} target="_blank" rel="noreferrer" aria-label="Message DataPillars on WhatsApp">
+        <span aria-hidden="true">WA</span>
+        WhatsApp
+      </a>
+      <a href={phoneHref} aria-label="Call DataPillars at +971 54 218 5806">
+        <span aria-hidden="true">☎</span>
+        Call
+      </a>
+    </aside>
   );
 }
 
