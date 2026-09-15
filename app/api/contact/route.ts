@@ -142,7 +142,8 @@ export async function POST(request: Request) {
 
       if (!response.ok) throw new Error("Email provider rejected the request.");
     } else {
-      const response = await fetch(`https://formsubmit.co/ajax/${encodeURIComponent(recipient)}`, {
+      const formTarget = process.env.CONTACT_FORM_TOKEN || recipient;
+      const response = await fetch(`https://formsubmit.co/ajax/${encodeURIComponent(formTarget)}`, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -159,7 +160,10 @@ export async function POST(request: Request) {
         }),
       });
 
-      if (!response.ok) throw new Error("Email provider rejected the request.");
+      const result = (await response.json()) as { success?: string | boolean };
+      if (!response.ok || ![true, "true"].includes(result.success ?? false)) {
+        throw new Error("Email provider rejected the request.");
+      }
     }
 
     return Response.json({ ok: true });
