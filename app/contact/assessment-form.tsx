@@ -66,11 +66,7 @@ export default function AssessmentForm() {
       window.dispatchEvent(new CustomEvent("datapillars:contact-submitted"));
     } catch (error) {
       setStatus("error");
-      setMessage(
-        error instanceof Error
-          ? error.message
-          : "We could not send the enquiry. Please call or use WhatsApp.",
-      );
+      setMessage(error instanceof Error ? error.message : "We could not send the enquiry. Please call or use WhatsApp.");
     }
   }
 

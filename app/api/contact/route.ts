@@ -93,7 +93,7 @@ export async function POST(request: Request) {
   }
 
   const recipient = process.env.CONTACT_TO_EMAIL;
-  if (!recipient) {
+  if (!recipient || !process.env.RESEND_API_KEY) {
     return Response.json(
       { ok: false, message: "Enquiries are temporarily unavailable. Please call or use WhatsApp." },
       { status: 503 },
@@ -113,8 +113,7 @@ export async function POST(request: Request) {
   ];
 
   try {
-    if (process.env.RESEND_API_KEY) {
-      const html = `
+    const html = `
         <div style="font-family:Arial,sans-serif;color:#0b1f33;max-width:720px">
           <h1 style="font-size:24px">New DataPillars website enquiry</h1>
           ${rows
@@ -125,46 +124,22 @@ export async function POST(request: Request) {
             .join("")}
         </div>`;
 
-      const response = await fetch("https://api.resend.com/emails", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          from: process.env.CONTACT_FROM_EMAIL || "DataPillars Website <onboarding@resend.dev>",
-          to: [recipient],
-          reply_to: enquiry.email,
-          subject,
-          html,
-        }),
-      });
+    const response = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        from: process.env.CONTACT_FROM_EMAIL || "DataPillars Website <onboarding@resend.dev>",
+        to: [recipient],
+        reply_to: enquiry.email,
+        subject,
+        html,
+      }),
+    });
 
-      if (!response.ok) throw new Error("Email provider rejected the request.");
-    } else {
-      const formTarget = process.env.CONTACT_FORM_TOKEN || recipient;
-      const response = await fetch(`https://formsubmit.co/ajax/${encodeURIComponent(formTarget)}`, {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          Origin: "https://datapillars.ae",
-          Referer: "https://datapillars.ae/contact",
-        },
-        body: JSON.stringify({
-          _subject: subject,
-          _template: "table",
-          _captcha: "false",
-          _replyto: enquiry.email,
-          ...Object.fromEntries(rows),
-        }),
-      });
-
-      const result = (await response.json()) as { success?: string | boolean };
-      if (!response.ok || ![true, "true"].includes(result.success ?? false)) {
-        throw new Error("Email provider rejected the request.");
-      }
-    }
+    if (!response.ok) throw new Error("Email provider rejected the request.");
 
     return Response.json({ ok: true });
   } catch {
