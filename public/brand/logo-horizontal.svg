@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="330" viewBox="0 0 1200 330">
+<rect width="1200" height="330" fill="white"/>
+<g transform="translate(55,85) scale(1.35)">
+<g id="datapillars-symbol">
+  <!-- fragmented data nodes -->
+  <rect x="8" y="73" width="10" height="10" rx="1" fill="#667085"/>
+  <rect x="22" y="57" width="10" height="10" rx="1" fill="#00A6A6"/>
+  <rect x="20" y="88" width="8" height="8" rx="1" fill="#667085"/>
+  <rect x="35" y="42" width="12" height="12" rx="1" fill="#00A6A6"/>
+  <rect x="36" y="70" width="9" height="9" rx="1" fill="#0B1F33"/>
+  <rect x="49" y="28" width="14" height="14" rx="1" fill="#00A6A6"/>
+  <!-- structured pillars -->
+  <path d="M64 108V48L91 31V108Z" fill="#A7D9D9"/>
+  <path d="M99 108V26L128 9V108Z" fill="#00A6A6"/>
+  <path d="M137 108V5L169 -10V108Z" fill="#0B1F33"/>
+</g>
+</g>
+<text x="320" y="178" font-family="Arial, Helvetica, sans-serif" font-size="104" font-weight="700" fill="#0B1F33">Data<tspan fill="#00A6A6">Pillars</tspan></text>
+<text x="325" y="232" font-family="Arial, Helvetica, sans-serif" font-size="25" letter-spacing="8" fill="#0B1F33">TURNING DATA INTO OPPORTUNITY</text>
+</svg>
