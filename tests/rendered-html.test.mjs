@@ -82,3 +82,15 @@ test("renders the company LinkedIn link with its recognised icon", async () => {
   assert.match(html, /class="social-link"[^>]*href="https:\/\/www\.linkedin\.com\/company\/104334551\/"/);
   assert.match(html, /Company LinkedIn/);
 });
+
+test("uses Mohamed Abdo's canonical LinkedIn profile everywhere", async () => {
+  const aboutResponse = await render("/about");
+  const aboutHtml = await aboutResponse.text();
+  assert.match(aboutHtml, /https:\/\/www\.linkedin\.com\/in\/mohamedabdoahmed\//);
+  assert.doesNotMatch(aboutHtml, /mohamed-abdo-21a3b5144/);
+
+  const homeResponse = await render();
+  const homeHtml = await homeResponse.text();
+  assert.match(homeHtml, /https:\/\/www\.linkedin\.com\/in\/mohamedabdoahmed\//);
+  assert.doesNotMatch(homeHtml, /mohamed-abdo-21a3b5144/);
+});

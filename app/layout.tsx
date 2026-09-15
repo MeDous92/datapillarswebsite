@@ -91,7 +91,7 @@ const organisationSchema = {
     {
       "@type": "Person",
       name: "Mohamed Abdo",
-      sameAs: "https://ae.linkedin.com/in/mohamed-abdo-21a3b5144",
+      sameAs: "https://www.linkedin.com/in/mohamedabdoahmed/",
     },
   ],
   sameAs: ["https://www.linkedin.com/company/104334551/"],

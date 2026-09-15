@@ -241,6 +241,6 @@ export const founders = [
       "MBA — GSW, USA",
       "CDMP, Data Engineering and AI Engineering credentials",
     ],
-    linkedin: "https://ae.linkedin.com/in/mohamed-abdo-21a3b5144",
+    linkedin: "https://www.linkedin.com/in/mohamedabdoahmed/",
   },
 ];
