@@ -48,7 +48,7 @@ export default function ContactPage() {
                   target="_blank"
                   rel="noreferrer"
                 >
-                  <Image src={founder.image} alt="" loading="lazy" width={58} height={58} sizes="58px" />
+                  <Image src={founder.image} alt="" unoptimized loading="lazy" width={58} height={58} sizes="58px" />
                   <span>
                     <strong>{founder.name}</strong>
                     <small>{founder.role} · LinkedIn ↗</small>

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { FaPhone, FaWhatsapp } from "react-icons/fa6";
 import { servicePillars } from "./data";
 
 const navItems = [
@@ -105,11 +106,11 @@ export function ContactDock() {
   return (
     <aside className="contact-dock" aria-label="Direct contact options">
       <a href={whatsappHref} target="_blank" rel="noreferrer" aria-label="Message DataPillars on WhatsApp">
-        <span aria-hidden="true">WA</span>
+        <FaWhatsapp className="whatsapp-icon" aria-hidden="true" />
         WhatsApp
       </a>
       <a href={phoneHref} aria-label="Call DataPillars at +971 54 218 5806">
-        <span aria-hidden="true">☎</span>
+        <FaPhone aria-hidden="true" />
         Call
       </a>
     </aside>

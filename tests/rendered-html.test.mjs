@@ -43,3 +43,22 @@ test("server-renders the core public routes", async () => {
     assert.match(html, /DataPillars/, pathname);
   }
 });
+
+test("serves portfolio and founder images directly without an image proxy", async () => {
+  const workResponse = await render("/work");
+  const workHtml = await workResponse.text();
+  assert.match(workHtml, /src="\/work\/airline-analytics\.webp"/);
+  assert.doesNotMatch(workHtml, /\/_vinext\/image|\/_next\/image/);
+
+  const aboutResponse = await render("/about");
+  const aboutHtml = await aboutResponse.text();
+  assert.match(aboutHtml, /src="\/team\/mohamed-abdo-v2\.webp"/);
+  assert.doesNotMatch(aboutHtml, /\/_vinext\/image|\/_next\/image/);
+});
+
+test("renders recognised direct-contact icons instead of the WA abbreviation", async () => {
+  const response = await render();
+  const html = await response.text();
+  assert.match(html, /aria-label="Message DataPillars on WhatsApp"/);
+  assert.doesNotMatch(html, />WA<\/span>/);
+});

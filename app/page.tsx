@@ -180,7 +180,7 @@ export default function Home() {
             {workSamples.slice(0, 3).map((sample) => (
               <article key={sample.title} className="proof-card">
                 <div className="proof-image-wrap">
-                  <Image src={sample.image} alt={sample.alt} loading="lazy" width={1200} height={675} sizes="(max-width: 820px) 100vw, 33vw" />
+                  <Image src={sample.image} alt={sample.alt} unoptimized loading="lazy" width={1200} height={675} sizes="(max-width: 820px) 100vw, 33vw" />
                 </div>
                 <p className="proof-category">{sample.category}</p>
                 <h3>{sample.title}</h3>
@@ -215,6 +215,7 @@ export default function Home() {
                   <Image
                     src={founder.image}
                     alt={founder.alt}
+                    unoptimized
                     loading="lazy"
                     width={400}
                     height={400}

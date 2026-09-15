@@ -68,6 +68,7 @@ export default function AboutPage() {
                   <Image
                     src={founder.image}
                     alt={founder.alt}
+                    unoptimized
                     loading="lazy"
                     width={400}
                     height={400}

@@ -47,6 +47,7 @@ export default function WorkPage() {
                 <Image
                   src={sample.image}
                   alt={sample.alt}
+                  unoptimized
                   loading="lazy"
                   decoding="async"
                   width={1200}
