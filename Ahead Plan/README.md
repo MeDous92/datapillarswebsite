@@ -6,6 +6,7 @@ This folder converts the website launch into two controlled follow-on workstream
 
 1. [SEO and Growth Plan](./SEO-and-Growth-Plan.md) — technical readiness, search-console setup, content, authority building, conversion measurement and a 90-day execution sequence.
 2. [Professional Email Setup Plan](./Professional-Email-Setup-Plan.md) — mailbox provider choice, Tasjeel DNS changes, two founder mailboxes, shared addresses, email authentication, Resend separation and security checks.
+3. [Portfolio Content Guide](./Portfolio-Content-Guide.md) — a repeatable publication standard for portals, applications, data-quality tools, governance artefacts and future delivery examples.
 
 ## Recommended order
 

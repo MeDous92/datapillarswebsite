@@ -115,20 +115,13 @@ export type WorkSample = {
   image: string;
   alt: string;
   focus: string[];
+  privacyNote?: string;
 };
 
-// Add new public examples here. Keep client names and confidential figures out
-// of descriptions and imagery unless publication has been explicitly approved.
+// Add approved public examples here; the Work page and home-page preview are
+// generated from this catalogue. Keep client names and confidential figures
+// out of descriptions and source imagery unless publication is approved.
 export const workSamples: WorkSample[] = [
-  {
-    title: "Operational airline analytics",
-    category: "Business intelligence",
-    description:
-      "An executive-ready view of activity, cancellations, passengers, revenue and operational trends.",
-    image: "/work/airline-analytics.webp",
-    alt: "Operational airline performance dashboard",
-    focus: ["Executive KPIs", "Trend analysis", "Operational exceptions"],
-  },
   {
     title: "Interactive sales performance",
     category: "Insight",
@@ -144,8 +137,9 @@ export const workSamples: WorkSample[] = [
     description:
       "A concise management view that brings financial position, comparison and trend signals into one narrative.",
     image: "/work/executive-reporting.webp",
-    alt: "Anonymised executive financial dashboard",
+    alt: "Anonymised executive financial dashboard with numerical values removed",
     focus: ["Management narrative", "Exception focus", "Measure governance"],
+    privacyNote: "Illustrative view — numerical values intentionally removed.",
   },
   {
     title: "Portfolio performance monitoring",
@@ -164,6 +158,42 @@ export const workSamples: WorkSample[] = [
     image: "/work/data-model.webp",
     alt: "Relational data model for a project controls application",
     focus: ["Data modelling", "Reusable definitions", "Application foundation"],
+  },
+  {
+    title: "Operational analytics",
+    category: "Business intelligence",
+    description:
+      "An executive-ready operational view of activity, exceptions, volume and performance trends using illustrative data.",
+    image: "/work/airline-analytics.webp",
+    alt: "Operational performance dashboard using illustrative sample data",
+    focus: ["Executive KPIs", "Trend analysis", "Operational exceptions"],
+  },
+];
+
+export const portfolioPipeline = [
+  {
+    title: "Data products & applications",
+    text: "Purpose-built portals, internal applications and workflow products that turn trusted data into day-to-day action.",
+  },
+  {
+    title: "Data quality tools & reports",
+    text: "Rule management, scorecards, exception reporting, issue workflows and remediation views for critical data.",
+  },
+  {
+    title: "Governance artefacts",
+    text: "Operating models, policies, standards, control catalogues, glossaries and decision forums designed for use.",
+  },
+  {
+    title: "Ownership & stewardship",
+    text: "RACI matrices, data-owner and steward structures, accountability maps and practical role descriptions.",
+  },
+  {
+    title: "Governed AI & agents",
+    text: "Controlled AI and data-agent prototypes with approved tools, validation and human oversight.",
+  },
+  {
+    title: "Process redesign & automation",
+    text: "Current-state maps, redesigned workflows, preventive controls, digitised handoffs and targeted automation.",
   },
 ];
 

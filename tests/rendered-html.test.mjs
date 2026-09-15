@@ -62,3 +62,23 @@ test("renders recognised direct-contact icons instead of the WA abbreviation", a
   assert.match(html, /aria-label="Message DataPillars on WhatsApp"/);
   assert.doesNotMatch(html, />WA<\/span>/);
 });
+
+test("renders the sanitised, extensible portfolio in the intended order", async () => {
+  const response = await render("/work");
+  const html = await response.text();
+  assert.doesNotMatch(html, /Operational airline analytics/);
+  assert.match(html, /Illustrative view — numerical values intentionally removed\./);
+  assert.match(html, /Data products &amp; applications/);
+  assert.match(html, /Data quality tools &amp; reports/);
+  assert.ok(
+    html.indexOf("Executive financial reporting") < html.indexOf("Operational analytics"),
+    "Operational analytics should be the final published sample",
+  );
+});
+
+test("renders the company LinkedIn link with its recognised icon", async () => {
+  const response = await render();
+  const html = await response.text();
+  assert.match(html, /class="social-link"[^>]*href="https:\/\/www\.linkedin\.com\/company\/104334551\/"/);
+  assert.match(html, /Company LinkedIn/);
+});

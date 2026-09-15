@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { FaPhone, FaWhatsapp } from "react-icons/fa6";
+import { FaLinkedin, FaPhone, FaWhatsapp } from "react-icons/fa6";
 import { servicePillars } from "./data";
 
 const navItems = [
@@ -24,8 +24,8 @@ export function SiteHeader() {
             className="brand-logo"
             src="/brand/logo-horizontal.svg"
             alt="DataPillars — Turning Data Into Opportunity"
-            width={245}
-            height={66}
+            width={300}
+            height={81}
             priority
           />
         </Link>
@@ -63,8 +63,8 @@ export function SiteFooter() {
           <Image
             src="/brand/logo-dark.svg"
             alt="DataPillars — Turning Data Into Opportunity"
-            width={245}
-            height={66}
+            width={300}
+            height={81}
           />
           <p>
             Trusted data foundations, better decisions, smarter processes and
@@ -78,8 +78,10 @@ export function SiteFooter() {
             <Link href="/assessment">Assessment</Link>
             <Link href="/work">Our work</Link>
             <Link href="/about">About</Link>
-            <a href={companyLinkedIn} target="_blank" rel="noreferrer">
-              Company LinkedIn ↗
+            <a className="social-link" href={companyLinkedIn} target="_blank" rel="noreferrer">
+              <FaLinkedin aria-hidden="true" />
+              <span>Company LinkedIn</span>
+              <span aria-hidden="true">↗</span>
             </a>
           </div>
         </div>
