@@ -17,6 +17,16 @@ Shared services, delivery steps, founder details and portfolio items live in `ap
 
 Never publish client names, confidential figures, credentials or identifying architecture details without explicit approval.
 
+## Enquiry delivery
+
+The contact form sends enquiries through Resend. Production values are managed in the Sites environment settings, separately from source control:
+
+- `CONTACT_TO_EMAIL`: comma-separated recipient addresses. The intended recipients are `mike.spence@datapillars.ae,mohamed.abdo@datapillars.ae`.
+- `CONTACT_FROM_EMAIL`: a sender on a domain verified in Resend, for example `DataPillars Website <website@datapillars.ae>`.
+- `RESEND_API_KEY`: the private Resend API key.
+
+Creating Microsoft 365 mailboxes does not verify a sending domain in Resend. Verify the domain using Resend's DNS records before changing the live sender and recipients together, then publish to apply the runtime configuration. The default `onboarding@resend.dev` test sender can only deliver to the Resend account owner's address. Replies to enquiries go to the visitor's email address.
+
 ## Local development
 
 Requires Node.js 22.13 or later.

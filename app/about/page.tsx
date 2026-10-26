@@ -82,14 +82,19 @@ export default function AboutPage() {
                   <ul>
                     {founder.details.map((detail) => <li key={detail}>{detail}</li>)}
                   </ul>
-                  <a
-                    href={founder.linkedin}
-                    className="text-link"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    View LinkedIn profile <span aria-hidden="true">↗</span>
-                  </a>
+                  <div className="founder-contact-links">
+                    <a href={`mailto:${founder.email}`} className="text-link founder-email">
+                      {founder.email}
+                    </a>
+                    <a
+                      href={founder.linkedin}
+                      className="text-link"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      View LinkedIn profile <span aria-hidden="true">↗</span>
+                    </a>
+                  </div>
                 </div>
               </article>
             ))}

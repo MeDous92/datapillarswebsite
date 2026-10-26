@@ -92,8 +92,15 @@ export async function POST(request: Request) {
     );
   }
 
-  const recipient = process.env.CONTACT_TO_EMAIL;
-  if (!recipient || !process.env.RESEND_API_KEY) {
+  const recipients = (process.env.CONTACT_TO_EMAIL || "")
+    .split(",")
+    .map((email) => email.trim())
+    .filter(Boolean);
+  if (
+    !recipients.length ||
+    recipients.some((email) => !emailPattern.test(email)) ||
+    !process.env.RESEND_API_KEY
+  ) {
     return Response.json(
       { ok: false, message: "Enquiries are temporarily unavailable. Please call or use WhatsApp." },
       { status: 503 },
@@ -132,7 +139,7 @@ export async function POST(request: Request) {
       },
       body: JSON.stringify({
         from: process.env.CONTACT_FROM_EMAIL || "DataPillars Website <onboarding@resend.dev>",
-        to: [recipient],
+        to: recipients,
         reply_to: enquiry.email,
         subject,
         html,

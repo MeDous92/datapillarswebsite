@@ -1135,6 +1135,8 @@ h3 { font-size: 1.35rem; font-weight: 680; }
 .founder-content { align-self: center; padding: 10px 18px 10px 0; }
 .founder-content h2 { margin-bottom: 25px; font-size: clamp(2.3rem, 4vw, 4rem); }
 .founder-bio { max-width: 680px; margin-bottom: 28px; color: var(--slate-dark); font-size: 1.06rem; }
+.founder-contact-links { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
+.founder-email { max-width: 100%; overflow-wrap: anywhere; }
 
 .founder-content ul {
   display: grid;
@@ -1475,6 +1477,7 @@ h3 { font-size: 1.35rem; font-weight: 680; }
   .founder-card { grid-template-columns: 1fr; padding: 28px 24px; text-align: center; }
   .founder-photo { width: 148px; height: 148px; }
   .founder-content { padding: 4px 0 0; }
+  .founder-contact-links { align-items: center; }
   .founder-content ul { text-align: left; }
   .page-hero h1 { font-size: clamp(2.35rem, 10.5vw, 3.25rem); overflow-wrap: anywhere; }
   .page-hero { padding: 66px 0 72px; background-size: 44px 44px; }

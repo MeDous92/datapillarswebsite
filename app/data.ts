@@ -219,6 +219,7 @@ export const problems = [
 export const founders = [
   {
     name: "Mike Spence",
+    email: "mike.spence@datapillars.ae",
     role: "Co-Founder",
     image: "/team/mike-spence.jpg",
     alt: "Mike Spence, Co-Founder of DataPillars",
@@ -232,6 +233,7 @@ export const founders = [
   },
   {
     name: "Mohamed Abdo",
+    email: "mohamed.abdo@datapillars.ae",
     role: "Co-Founder",
     image: "/team/mohamed-abdo-v2.webp",
     alt: "Mohamed Abdo, Co-Founder of DataPillars",
