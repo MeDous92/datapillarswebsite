@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import {
+  BookingLink,
   CallToAction,
   SectionHeading,
   ServiceCards,
@@ -32,13 +33,14 @@ export default function Home() {
               AI-ready operations.
             </p>
             <div className="button-row">
-              <Link href="/contact" className="button button-coral">
-                Start with clarity
-              </Link>
+              <BookingLink />
               <Link href="/services" className="button button-secondary">
                 Explore our capabilities
               </Link>
             </div>
+            <Link href="/contact" className="text-link hero-enquiry-link">
+              Prefer to send a brief? <span aria-hidden="true">→</span>
+            </Link>
           </div>
           <div className="hero-visual" aria-label="DataPillars value pathway">
             <div className="hero-visual-heading">

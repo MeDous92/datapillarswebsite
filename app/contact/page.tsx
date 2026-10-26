@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { PageHero } from "../components";
+import { BookingLink, PageHero } from "../components";
 import { founders } from "../data";
 import AssessmentForm from "./assessment-form";
 
@@ -19,6 +19,7 @@ export default function ContactPage() {
         title="Find the first high-value opportunity."
         description="Select one business area and tell us where trust, manual effort, decision quality or AI readiness is getting in the way. We will use that context to shape a focused first conversation."
         aside="No need to diagnose the technology first. Start with the business symptom."
+        action={<BookingLink />}
       />
 
       <section className="section contact-section">

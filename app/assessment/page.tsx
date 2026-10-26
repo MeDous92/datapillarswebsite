@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { CallToAction, PageHero, SectionHeading } from "../components";
+import { BookingLink, CallToAction, PageHero, SectionHeading } from "../components";
 
 export const metadata: Metadata = {
   title: "Complimentary Assessment",
@@ -35,6 +35,7 @@ export default function AssessmentPage() {
         title="Start with clarity before committing to delivery."
         description="We assess one selected business area, translate the evidence into business risks and opportunities, and define the first initiative with a credible value case."
         aside="Focused scope. No commitment required. Practical next step."
+        action={<BookingLink />}
       />
 
       <section className="section assessment-overview">

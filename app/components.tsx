@@ -1,19 +1,41 @@
 import Link from "next/link";
 import Image from "next/image";
+import type { ReactNode } from "react";
 import { FaLinkedin, FaPhone, FaWhatsapp } from "react-icons/fa6";
-import { servicePillars } from "./data";
+import { bookingUrl, servicePillars } from "./data";
 
 const navItems = [
   { href: "/services", label: "Services" },
   { href: "/assessment", label: "Assessment" },
   { href: "/work", label: "Our work" },
   { href: "/about", label: "About" },
+  { href: "/contact", label: "Contact" },
 ];
 
 const companyLinkedIn = "https://www.linkedin.com/company/104334551/";
 const phoneHref = "tel:+971542185806";
 const whatsappHref =
   "https://wa.me/971542185806?text=Hello%20DataPillars%2C%20I%27d%20like%20to%20discuss%20a%20data%20or%20AI%20opportunity.";
+
+export function BookingLink({
+  className = "button button-coral booking-link",
+  label = "Book an introductory call",
+}: {
+  className?: string;
+  label?: string;
+}) {
+  return (
+    <a
+      href={bookingUrl}
+      className={className}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={`${label} (opens in a new tab)`}
+    >
+      {label} <span aria-hidden="true">↗</span>
+    </a>
+  );
+}
 
 export function SiteHeader() {
   return (
@@ -36,9 +58,7 @@ export function SiteHeader() {
             </Link>
           ))}
         </nav>
-        <Link href="/contact" className="button button-small header-cta">
-          Start a conversation
-        </Link>
+        <BookingLink className="button button-small header-cta booking-link" label="Book a call" />
         <details className="mobile-menu">
           <summary aria-label="Open navigation">Menu</summary>
           <nav aria-label="Mobile navigation">
@@ -47,7 +67,7 @@ export function SiteHeader() {
                 {item.label}
               </Link>
             ))}
-            <Link href="/contact">Start a conversation</Link>
+            <BookingLink className="mobile-booking-link" />
           </nav>
         </details>
       </div>
@@ -124,11 +144,13 @@ export function PageHero({
   title,
   description,
   aside,
+  action,
 }: {
   eyebrow: string;
   title: string;
   description: string;
   aside?: string;
+  action?: ReactNode;
 }) {
   return (
     <section className="page-hero">
@@ -140,6 +162,7 @@ export function PageHero({
         <div className="page-hero-copy">
           <p>{description}</p>
           {aside ? <p className="aside-note">{aside}</p> : null}
+          {action ? <div className="page-hero-actions">{action}</div> : null}
         </div>
       </div>
     </section>
@@ -203,9 +226,12 @@ export function CallToAction({
           <h2>{title}</h2>
           <p>{text}</p>
         </div>
-        <Link href="/contact" className="button button-coral">
-          Start the conversation
-        </Link>
+        <div className="cta-actions">
+          <BookingLink />
+          <Link href="/contact" className="text-link text-link-light">
+            Send an enquiry <span aria-hidden="true">→</span>
+          </Link>
+        </div>
       </div>
     </section>
   );

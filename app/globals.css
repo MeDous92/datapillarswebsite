@@ -200,6 +200,8 @@ h3 { font-size: 1.35rem; font-weight: 680; }
 }
 
 .button-small { min-height: 42px; padding-inline: 19px; font-size: 0.82rem; }
+.booking-link { gap: 10px; text-align: center; }
+.booking-link span { flex: 0 0 auto; }
 .button-coral { border-color: var(--coral); background: var(--coral); }
 .button-coral:hover { border-color: var(--coral-dark); background: var(--coral-dark); }
 
@@ -333,6 +335,7 @@ h3 { font-size: 1.35rem; font-weight: 680; }
 .hero-copy { padding-bottom: 40px; }
 .hero-copy h1 { max-width: 820px; margin-bottom: 30px; }
 .hero-copy h1 span { color: var(--teal-dark); }
+.hero-enquiry-link { margin-top: 22px; }
 
 .hero-lead {
   max-width: 730px;
@@ -783,6 +786,7 @@ h3 { font-size: 1.35rem; font-weight: 680; }
 .cta-band h2 { max-width: 850px; margin-bottom: 22px; }
 .cta-band p:not(.eyebrow) { max-width: 750px; margin-bottom: 0; color: #c2ced8; font-size: 1.05rem; }
 .cta-band .button { flex: 0 0 auto; }
+.cta-actions { display: grid; flex: 0 0 auto; justify-items: start; gap: 16px; }
 
 .page-hero {
   position: relative;
@@ -824,6 +828,8 @@ h3 { font-size: 1.35rem; font-weight: 680; }
   font-size: clamp(1.06rem, 1.5vw, 1.22rem);
   line-height: 1.75;
 }
+
+.page-hero-actions { margin-top: 26px; }
 
 .aside-note {
   margin-bottom: 0;
@@ -1450,6 +1456,7 @@ h3 { font-size: 1.35rem; font-weight: 680; }
   h1 { font-size: clamp(2.8rem, 14vw, 4.2rem); }
   h2 { font-size: clamp(2.1rem, 11vw, 3.3rem); }
   .button-row, .button-row .button, .button-row a, .cta-band .button { width: 100%; }
+  .cta-actions, .page-hero-actions .button { width: 100%; }
   .hero-visual { min-height: 385px; padding: 24px 20px; }
   .hero-visual-heading strong { max-width: 100px; }
   .pillar-graphic { height: 245px; gap: 10px; padding: 25px 5px 20px 65px; }

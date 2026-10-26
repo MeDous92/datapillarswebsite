@@ -1,3 +1,6 @@
+export const bookingUrl =
+  "https://bookings.cloud.microsoft/book/DataPillarsTurningDataIntoOpportunity@datapillars.ae/?ismsaljsauthenabled";
+
 export type ServicePillar = {
   id: string;
   number: string;
